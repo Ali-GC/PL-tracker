@@ -9,4 +9,5 @@ import com.alicode.pltracker.models.Match;
 @Service
 public interface MatchService {
     List<Match> getMatches();
+    List<Match> getMatchesByTeam(String team_name);
 }

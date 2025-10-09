@@ -21,7 +21,7 @@ public class Match {
     private int matchweek;
     private String match_date;
     private String kickoff_date;
-    private String home_team;
+    private String homeTeam;
     private String away_team;
     private int home_score;
     private int away_score;

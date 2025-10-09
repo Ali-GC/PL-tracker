@@ -21,4 +21,9 @@ public class MatchServiceImp implements MatchService {
     public List<Match> getMatches(){
         return repo.findAll();
     }
+
+    @Override
+    public List<Match> getMatchesByTeam(String team_name) {
+        return repo.findByhomeTeam(team_name);
+    }
 }
