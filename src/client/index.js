@@ -19,14 +19,14 @@ function create_elements(element) {
     const home = document.createElement("td")
     home.textContent = element.homeTeam
     const away = document.createElement("td")
-    away.textContent = element.away_team
+    away.textContent = element.awayTeam
     const score = document.createElement("td")
     score.textContent = `${element.home_score}-${element.away_score}`
     const win = document.createElement("td")
     if(element.homeTeam == teamSelection.value && element.home_score > element.away_score){
         win.textContent = "Win"
     }
-    else if(element.away_team == teamSelection.value && element.home_score < element.away_score){
+    else if(element.awayTeam == teamSelection.value && element.home_score < element.away_score){
         win.textContent = "Win"
     }
     else if(element.home_score == element.away_score){

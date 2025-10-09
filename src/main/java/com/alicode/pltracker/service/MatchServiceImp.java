@@ -23,7 +23,7 @@ public class MatchServiceImp implements MatchService {
     }
 
     @Override
-    public List<Match> getMatchesByTeam(String team_name) {
-        return repo.findByhomeTeam(team_name);
+    public List<Match> getMatchesByTeam(String team_name, String away_name) {
+        return repo.findByhomeTeamOrAwayTeam(team_name, away_name);
     }
 }
