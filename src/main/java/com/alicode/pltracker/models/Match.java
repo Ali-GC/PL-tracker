@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "pl_matches")
 public class Match {
     @Id
-    private Long id;
+    private Long match_id;
     private String season;
     private int matchweek;
     private String match_date;
