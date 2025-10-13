@@ -1,0 +1,36 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="match.pltracker.com"
+           targetNamespace="match.pltracker.com" elementFormDefault="qualified">
+
+    <xs:element name="getMatchRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="homeTeam" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMatchResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="matchDetails" type="tns:matchDetails"
+                            maxOccurs = "unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="matchDetails">
+        <xs:sequence>
+            <xs:element name="match_id" type="xs:long" />
+            <xs:element name="season" type="xs:string" />
+            <xs:element name="matchweek" type="xs:int" />
+            <xs:element name="match_date" type="xs:string" />
+            <xs:element name="kickoff_date" type="xs:string" />
+            <xs:element name="homeTeam" type="xs:string" />
+            <xs:element name="awayTeam" type="xs:string" />
+            <xs:element name="home_score" type="xs:int" />
+            <xs:element name="away_score" type="xs:int" />
+            <xs:element name="venue" type="xs:string" />
+            <xs:element name="source_url" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
