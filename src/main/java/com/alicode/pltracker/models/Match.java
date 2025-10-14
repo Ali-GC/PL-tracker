@@ -32,7 +32,7 @@ public class Match {
         return match_id;
     }
 
-    public void setMatchId(Long match_id){
+    public void setMatchId(long match_id){
         this.match_id = match_id;
     }
 

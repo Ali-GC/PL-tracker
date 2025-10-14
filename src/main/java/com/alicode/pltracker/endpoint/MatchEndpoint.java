@@ -9,7 +9,9 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.alicode.pltracker.models.Match;
-import com.alicode.pltracker.service.MatchSoapService;
+import com.alicode.pltracker.service.MatchService;
+import com.pltracker.match.CreateMatchRequest;
+import com.pltracker.match.CreateMatchResponse;
 import com.pltracker.match.GetMatchRequest;
 import com.pltracker.match.GetMatchResponse;
 import com.pltracker.match.MatchDetails;
@@ -18,7 +20,7 @@ import com.pltracker.match.MatchDetails;
 public class MatchEndpoint {
 
     @Autowired
-    MatchSoapService service;
+    MatchService service;
     
     @PayloadRoot(namespace="match.pltracker.com", localPart="getMatchRequest")
     @ResponsePayload
@@ -47,6 +49,32 @@ public class MatchEndpoint {
         }
         return response;
     }
+
+    @PayloadRoot(namespace="match.pltracker.com", localPart="createMatchRequest")
+    @ResponsePayload
+    public CreateMatchResponse createMatchRequest(@RequestPayload CreateMatchRequest request){
+        MatchDetails matchDetails = request.getMatchDetails();
+        Match match = mapMatchDetails(matchDetails);
+        Match newMatch = service.create(match);
+        return new CreateMatchResponse();
+    }
+
+    private Match mapMatchDetails(MatchDetails matchDetails) {
+        Match match = new Match();
+        match.setMatchId(matchDetails.getMatchId());
+        match.setSeason(matchDetails.getSeason());
+        match.setMatchweek(matchDetails.getMatchweek());
+        match.setMatchDate(matchDetails.getMatchDate());
+        match.setKickoffDate(matchDetails.getKickoffDate());
+        match.setHomeTeam(matchDetails.getHomeTeam());
+        match.setAwayTeam(matchDetails.getAwayTeam());
+        match.setHomeScore(matchDetails.getHomeScore());
+        match.setAwayScore(matchDetails.getAwayScore());
+        match.setVenue(matchDetails.getVenue());
+        match.setSourceUrl(matchDetails.getSourceUrl());
+        return match;
+    }
 }
+
 
 

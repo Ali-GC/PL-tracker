@@ -18,6 +18,21 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="createMatchRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="matchDetails" type="tns:matchDetails" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createMatchResponse">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:complexType name="matchDetails">
         <xs:sequence>
             <xs:element name="match_id" type="xs:long" />

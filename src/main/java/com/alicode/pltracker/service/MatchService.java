@@ -10,4 +10,6 @@ import com.alicode.pltracker.models.Match;
 public interface MatchService {
     List<Match> getMatches();
     List<Match> getMatchesByTeam(String team_name, String away_name);
+    // Match create(Long match_id, String season, int matchweek, String match_date, String kickoff_date, String homeTeam, String awayTeam, int home_score, int away_score, String venue, String source_url);
+    Match create(Match match);
 }

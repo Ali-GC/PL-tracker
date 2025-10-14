@@ -26,4 +26,12 @@ public class MatchServiceImp implements MatchService {
     public List<Match> getMatchesByTeam(String team_name, String away_name) {
         return repo.findByhomeTeamOrAwayTeam(team_name, away_name);
     }
+
+    @Override
+    // public Match create(Long match_id, String season, int matchweek, String match_date, String kickoff_date, String homeTeam, String awayTeam, int home_score, int away_score, String venue, String source_url) {
+    //     return repo.save(match_id, season, matchweek, match_date, kickoff_date, homeTeam, awayTeam, home_score, away_score, venue, source_url);
+    // }
+    public Match create(Match match){
+        return repo.save(match);
+    }
 }
