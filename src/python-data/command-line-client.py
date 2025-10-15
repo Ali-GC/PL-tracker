@@ -58,7 +58,7 @@ away_team = input("please enter the away team: ")
 home_score = input("please enter the home_score: ")
 away_score = input("please enter the away_score: ")
 venue = venue_dictionary[home_team]
-source_url = "https://www.premierleague.com/en/"
+source_url = 'https://fixturedownload.com/results/epl-2025'
 match_id = f"2526{match_week}999{id_dictionary[home_team]}"
 # structured XML
 payload = f"""<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
