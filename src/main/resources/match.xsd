@@ -37,15 +37,56 @@
         <xs:sequence>
             <xs:element name="match_id" type="xs:long" />
             <xs:element name="season" type="xs:string" />
-            <xs:element name="matchweek" type="xs:int" />
+            <xs:element name="match_week" type="xs:int" />
             <xs:element name="match_date" type="xs:string" />
-            <xs:element name="kickoff_date" type="xs:string" />
+            <xs:element name="kickoff_time" type="xs:string" />
             <xs:element name="homeTeam" type="xs:string" />
             <xs:element name="awayTeam" type="xs:string" />
             <xs:element name="home_score" type="xs:int" />
             <xs:element name="away_score" type="xs:int" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getTeamRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="teamName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getTeamResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="teamDetails" type="tns:teamDetails"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateOwnerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="teamName" type="xs:string"/>
+                <xs:element name="ownerName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updateOwnerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="status" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="teamDetails">
+        <xs:sequence>
+            <xs:element name="team_id" type="xs:long" />
+            <xs:element name="teamName" type="xs:string" />
             <xs:element name="venue" type="xs:string" />
-            <xs:element name="source_url" type="xs:string" />
+            <xs:element name="ownerName" type="xs:string" />
+            <xs:element name="logo_url" type="xs:string" />
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

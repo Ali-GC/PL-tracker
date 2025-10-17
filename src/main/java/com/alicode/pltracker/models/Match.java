@@ -13,20 +13,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "pl_matches")
+@Table(name = "matches")
 public class Match {
     @Id
     private Long match_id;
     private String season;
-    private int matchweek;
+    private int match_week;
     private String match_date;
-    private String kickoff_date;
+    private String kickoff_time;
     private String homeTeam;
     private String awayTeam;
     private int home_score;
     private int away_score;
-    private String venue;
-    private String source_url;
 
     public Long getMatchId(){
         return match_id;
@@ -42,6 +40,14 @@ public class Match {
 
     public void setMatchDate(String match_date){
         this.match_date = match_date;
+    }
+
+    public int getMatchWeek(){
+        return match_week;
+    }
+
+    public void setMatchWeek(int match_week){
+        this.match_week = match_week;
     }
 
     public String getKickoffDate(){
@@ -66,13 +72,5 @@ public class Match {
 
     public void setAwayScore(int away_score){
         this.away_score = away_score;
-    }
-
-    public String getSourceUrl(){
-        return source_url;
-    }
-
-    public void setSourceUrl(String source_url){
-        this.source_url = source_url;
     }
 }

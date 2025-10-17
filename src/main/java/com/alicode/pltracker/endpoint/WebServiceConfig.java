@@ -38,6 +38,7 @@ public class WebServiceConfig {
 
         return definition;
     }
+
     @Bean
     public XsdSchema matchesSchema(){
         return new SimpleXsdSchema(new ClassPathResource("match.xsd"));
