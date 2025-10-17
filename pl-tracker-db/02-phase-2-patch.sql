@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS matches;
 
 CREATE TABLE matches (
-    match_id        INT GENERATED ALWAYS AS IDENTITY,
+    match_id        INTEGER PRIMARY KEY,
     season          VARCHAR(9) NOT NULL,
     match_week      INTEGER,
     match_date      DATE NOT NULL,
@@ -26,8 +26,8 @@ CREATE TABLE teams (
 );
 
 
-INSERT INTO matches (season, match_week, match_date, kickoff_time, home_team, away_team, home_score, away_score)
-SELECT season, matchweek, match_date, kickoff_time, home_team, away_team, home_score, away_score
+INSERT INTO matches (match_id, season, match_week, match_date, kickoff_time, home_team, away_team, home_score, away_score)
+SELECT match_id, season, matchweek, match_date, kickoff_time, home_team, away_team, home_score, away_score
 FROM pl_matches;
 
 INSERT INTO teams (team_name, venue, owner_name, logo_url) VALUES
