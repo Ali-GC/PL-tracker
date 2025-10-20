@@ -12,6 +12,8 @@ import com.alicode.pltracker.models.Match;
 import com.alicode.pltracker.service.MatchService;
 import com.pltracker.match.CreateMatchRequest;
 import com.pltracker.match.CreateMatchResponse;
+import com.pltracker.match.GetAllMatchesRequest;
+import com.pltracker.match.GetAllMatchesResponse;
 import com.pltracker.match.GetMatchRequest;
 import com.pltracker.match.GetMatchResponse;
 import com.pltracker.match.MatchDetails;
@@ -29,9 +31,34 @@ public class MatchEndpoint {
         List<Match> matches = service.getMatchesByTeam(team, team);
         return mapMatches(matches);
     }
+    
+    @PayloadRoot(namespace="match.pltracker.com", localPart="getAllMatchesRequest")
+    @ResponsePayload
+    public GetAllMatchesResponse getAllMatchesRequest(@RequestPayload GetAllMatchesRequest request){
+        List<Match> matches = service.getMatches();
+        return mapAllMatches(matches);
+    }
 
     private GetMatchResponse mapMatches(List<Match> matches) {
         GetMatchResponse response = new GetMatchResponse();
+        for(Match match: matches){
+            MatchDetails matchDetails = new MatchDetails();
+            matchDetails.setMatchId(match.getMatchId());
+            matchDetails.setSeason(match.getSeason());
+            matchDetails.setMatchWeek(match.getMatchWeek());
+            matchDetails.setMatchDate(match.getMatchDate());
+            matchDetails.setKickoffTime(match.getKickoffDate());
+            matchDetails.setHomeTeam(match.getHomeTeam());
+            matchDetails.setAwayTeam(match.getAwayTeam());
+            matchDetails.setHomeScore(match.getHomeScore());
+            matchDetails.setAwayScore(match.getAwayScore());
+            response.getMatchDetails().add(matchDetails);
+        }
+        return response;
+    }
+
+    private GetAllMatchesResponse mapAllMatches(List<Match> matches) {
+        GetAllMatchesResponse response = new GetAllMatchesResponse();
         for(Match match: matches){
             MatchDetails matchDetails = new MatchDetails();
             matchDetails.setMatchId(match.getMatchId());
