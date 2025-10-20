@@ -18,6 +18,23 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="getAllMatchesRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllMatchesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="matchDetails" type="tns:matchDetails"
+                            maxOccurs = "unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
     <xs:element name="createMatchRequest">
         <xs:complexType>
             <xs:sequence>

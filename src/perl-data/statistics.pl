@@ -6,6 +6,11 @@ use HTTP::Request::Common;
 use XML::LibXML;
 use Data::Dumper;
 
+my $setting = $ARGV[0];
+
+if (not defined $setting) {
+  die "Need setting\n";
+}
 
 my $message = <<'XML';
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -77,17 +82,25 @@ if ($response->is_success) {
         my $total = $matches_played{$team};
         $winrate{$team} = $wins / $total;
     }
+
+    if($setting eq "winrate"){
     # Print results
-    print "Win rates (descending):\n";
-    for my $team (sort { $winrate{$b} <=> $winrate{$a} } keys %winrate) {
-        printf "%-25s : %.2f%% (%d/%d wins)\n", 
-            $team, $winrate{$team}*100, $wins{$team}//0, $matches_played{$team};
+        print "Win rates (descending):\n";
+        for my $team (sort { $winrate{$b} <=> $winrate{$a} } keys %winrate) {
+            printf "%-25s : %.2f%% (%d/%d wins)\n", 
+                $team, $winrate{$team}*100, $wins{$team}//0, $matches_played{$team};
+        }
     }
-    # Print matches player
-    print "Matches played (descending):\n";
-    for my $team (sort { $matches_played{$b} <=> $matches_played{$a} } keys %matches_played) {
-        printf "%-25s : %-25s\n", 
-            $team, $matches_played{$team};
+    elsif($setting eq "mp"){
+        # Print matches player
+        print "Matches played (descending):\n";
+        for my $team (sort { $matches_played{$b} <=> $matches_played{$a} } keys %matches_played) {
+            printf "%-25s : %-25s\n", 
+                $team, $matches_played{$team};
+        }
+    }
+    else{
+        print "Need valid setting, use 'winrate' for winrate or 'mp' for matches played";
     }
 }
 else {
