@@ -36,15 +36,13 @@ public class MatchEndpoint {
             MatchDetails matchDetails = new MatchDetails();
             matchDetails.setMatchId(match.getMatchId());
             matchDetails.setSeason(match.getSeason());
-            matchDetails.setMatchweek(match.getMatchweek());
+            matchDetails.setMatchWeek(match.getMatchWeek());
             matchDetails.setMatchDate(match.getMatchDate());
-            matchDetails.setKickoffDate(match.getKickoffDate());
+            matchDetails.setKickoffTime(match.getKickoffDate());
             matchDetails.setHomeTeam(match.getHomeTeam());
             matchDetails.setAwayTeam(match.getAwayTeam());
             matchDetails.setHomeScore(match.getHomeScore());
             matchDetails.setAwayScore(match.getAwayScore());
-            matchDetails.setVenue(match.getVenue());
-            matchDetails.setSourceUrl(match.getSourceUrl());
             response.getMatchDetails().add(matchDetails);
         }
         return response;
@@ -63,15 +61,13 @@ public class MatchEndpoint {
         Match match = new Match();
         match.setMatchId(matchDetails.getMatchId());
         match.setSeason(matchDetails.getSeason());
-        match.setMatchweek(matchDetails.getMatchweek());
+        match.setMatchWeek(matchDetails.getMatchWeek());
         match.setMatchDate(matchDetails.getMatchDate());
-        match.setKickoffDate(matchDetails.getKickoffDate());
+        match.setKickoffDate(matchDetails.getKickoffTime());
         match.setHomeTeam(matchDetails.getHomeTeam());
         match.setAwayTeam(matchDetails.getAwayTeam());
         match.setHomeScore(matchDetails.getHomeScore());
         match.setAwayScore(matchDetails.getAwayScore());
-        match.setVenue(matchDetails.getVenue());
-        match.setSourceUrl(matchDetails.getSourceUrl());
         return match;
     }
 }

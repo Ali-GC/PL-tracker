@@ -28,23 +28,32 @@ sourceSets {
 }
 
 task genJaxb {
-	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
-	ext.schema = "src/main/resources/match.xsd"
+    ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+    ext.schemaDir = "src/main/resources"
 
-	outputs.dir sourcesDir
+    outputs.dir sourcesDir
 
-	doLast() {
-		project.ant {
-			taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
-					classpath: configurations.jaxb.asPath
-			mkdir(dir: sourcesDir)
+    doLast {
+        def schemaFiles = fileTree(dir: schemaDir, include: '**/*.xsd').files
+        if (!schemaFiles) {
+            logger.lifecycle("No XSDs found in $schemaDir")
+            return
+        }
 
-			xjc(destdir: sourcesDir, schema: schema) {
-				arg(value: "-wsdl")
-				produces(dir: sourcesDir, includes: "**/*.java")
-			}
-		}
-	}
+        project.ant {
+            taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+                    classpath: configurations.jaxb.asPath
+            mkdir(dir: sourcesDir)
+
+            schemaFiles.each { File schemaFile ->
+                logger.lifecycle("Generating JAXB from: ${schemaFile}")
+                xjc(destdir: sourcesDir, schema: schemaFile) {
+                    arg(value: "-wsdl")
+                    produces(dir: sourcesDir, includes: "**/*.java")
+                }
+            }
+        }
+    }
 }
 
 compileJava.dependsOn genJaxb

@@ -25,7 +25,6 @@ teamSelection.addEventListener('change', async () => {
     if (!response.ok) throw new Error("Failed to fetch requests")
     const requests = await response.text()
     results = getMatchDetailsFromSoap(requests)
-    console.log(results);
     results.forEach(element => {
         create_elements(element)
     });
