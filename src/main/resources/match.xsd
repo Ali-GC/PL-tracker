@@ -106,4 +106,40 @@
             <xs:element name="logo_url" type="xs:string" />
         </xs:sequence>
     </xs:complexType>
+
+    <xs:element name="getAllDataRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllDataResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="databaseResponseType" type="tns:databaseResponseType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="databaseResponseType">
+    <xs:sequence>
+      <xs:element name="matches" type="tns:matchesType" minOccurs="0"/>
+      <xs:element name="team" type="tns:teamsType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="matchesType">
+    <xs:sequence>
+      <xs:element name="match" type="tns:matchDetails" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="teamsType">
+    <xs:sequence>
+      <xs:element name="team" type="tns:teamDetails" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
 </xs:schema>
+
