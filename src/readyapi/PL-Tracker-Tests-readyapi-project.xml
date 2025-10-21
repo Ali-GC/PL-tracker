@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="188b9e4b-f608-4ea8-a7eb-71a4ba690106" created="3.62.0" activeEnvironment="Default environment" encryptionMode="Not encrypted" name="PL-Tracker-Tests" projectVersion="" updated="3.62.0 2025-09-03T10:21:09Z" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:interface xsi:type="con:WsdlInterface" id="32fd3824-b9df-4bfa-a2e9-871f56f573d7" wsaVersion="NONE" name="MatchPortSoap11" type="wsdl" bindingName="{match.pltracker.com}MatchPortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/ws/match.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:settings id="1d6d0176-c61f-4924-b1da-b0a6ee9a0e3f"/>
+    <con:definitionCache type="TEXT" rootPart="http://localhost:8080/ws/match.wsdl">
+      <con:part>
+        <con:url>http://localhost:8080/ws/match.wsdl</con:url>
+        <con:content><![CDATA[<wsdl:definitions targetNamespace="match.pltracker.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="match.pltracker.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="match.pltracker.com">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="match.pltracker.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getMatchRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="homeTeam" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMatchResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="matchDetails" type="tns:matchDetails"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAllMatchesRequest">
+        <xs:complexType>
+          <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAllMatchesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="matchDetails" type="tns:matchDetails"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createMatchRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="matchDetails" type="tns:matchDetails"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createMatchResponse">
+        <xs:complexType>
+          <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="matchDetails">
+        <xs:sequence>
+          <xs:element name="match_id" type="xs:long"/>
+          <xs:element name="season" type="xs:string"/>
+          <xs:element name="match_week" type="xs:int"/>
+          <xs:element name="match_date" type="xs:string"/>
+          <xs:element name="kickoff_time" type="xs:string"/>
+          <xs:element name="homeTeam" type="xs:string"/>
+          <xs:element name="awayTeam" type="xs:string"/>
+          <xs:element name="home_score" type="xs:int"/>
+          <xs:element name="away_score" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getTeamRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="teamName" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTeamResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="teamDetails" type="tns:teamDetails"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateOwnerRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="teamName" type="xs:string"/>
+            <xs:element name="ownerName" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateOwnerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="status" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="teamDetails">
+        <xs:sequence>
+          <xs:element name="team_id" type="xs:long"/>
+          <xs:element name="teamName" type="xs:string"/>
+          <xs:element name="venue" type="xs:string"/>
+          <xs:element name="ownerName" type="xs:string"/>
+          <xs:element name="logo_url" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getAllDataRequest">
+        <xs:complexType>
+          <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAllDataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="databaseResponseType" type="tns:databaseResponseType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="databaseResponseType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="matches" type="tns:matchesType"/>
+          <xs:element minOccurs="0" name="team" type="tns:teamsType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="matchesType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="match" type="tns:matchDetails"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="teamsType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="team" type="tns:teamDetails"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getTeamRequest">
+    <wsdl:part element="tns:getTeamRequest" name="getTeamRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllMatchesResponse">
+    <wsdl:part element="tns:getAllMatchesResponse" name="getAllMatchesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllMatchesRequest">
+    <wsdl:part element="tns:getAllMatchesRequest" name="getAllMatchesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateOwnerRequest">
+    <wsdl:part element="tns:updateOwnerRequest" name="updateOwnerRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMatchRequest">
+    <wsdl:part element="tns:getMatchRequest" name="getMatchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllDataResponse">
+    <wsdl:part element="tns:getAllDataResponse" name="getAllDataResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMatchResponse">
+    <wsdl:part element="tns:getMatchResponse" name="getMatchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createMatchRequest">
+    <wsdl:part element="tns:createMatchRequest" name="createMatchRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTeamResponse">
+    <wsdl:part element="tns:getTeamResponse" name="getTeamResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateOwnerResponse">
+    <wsdl:part element="tns:updateOwnerResponse" name="updateOwnerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllDataRequest">
+    <wsdl:part element="tns:getAllDataRequest" name="getAllDataRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createMatchResponse">
+    <wsdl:part element="tns:createMatchResponse" name="createMatchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MatchPort">
+    <wsdl:operation name="getTeam">
+      <wsdl:input message="tns:getTeamRequest" name="getTeamRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getTeamResponse" name="getTeamResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllMatches">
+      <wsdl:input message="tns:getAllMatchesRequest" name="getAllMatchesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllMatchesResponse" name="getAllMatchesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateOwner">
+      <wsdl:input message="tns:updateOwnerRequest" name="updateOwnerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateOwnerResponse" name="updateOwnerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMatch">
+      <wsdl:input message="tns:getMatchRequest" name="getMatchRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getMatchResponse" name="getMatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllData">
+      <wsdl:input message="tns:getAllDataRequest" name="getAllDataRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllDataResponse" name="getAllDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createMatch">
+      <wsdl:input message="tns:createMatchRequest" name="createMatchRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createMatchResponse" name="createMatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MatchPortSoap11" type="tns:MatchPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getTeam">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getTeamRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTeamResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllMatches">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllMatchesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllMatchesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateOwner">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="updateOwnerRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateOwnerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMatch">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getMatchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllData">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllDataRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllDataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createMatch">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createMatchRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createMatchResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MatchPortService">
+    <wsdl:port binding="tns:MatchPortSoap11" name="MatchPortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content>
+        <con:type>http://schemas.xmlsoap.org/wsdl/</con:type>
+      </con:part>
+    </con:definitionCache>
+    <con:endpoints>
+      <con:endpoint>http://localhost:8080/ws</con:endpoint>
+    </con:endpoints>
+    <con:operation id="11ed26cc-f455-493c-9e60-1d3d169d83a9" isOneWay="false" action="" name="createMatch" bindingOperationName="createMatch" type="Request-Response" outputName="createMatchResponse" inputName="createMatchRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional">
+      <con:settings/>
+      <con:call id="8d4a198b-b7ac-42b5-ac8e-c64588bc304b" name="Happy-Path">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:encoding>UTF-8</con:encoding>
+        <con:endpoint>http://localhost:8080/ws</con:endpoint>
+        <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mat:createMatchRequest>\r
+         <mat:matchDetails>\r
+            <mat:match_id>11111</mat:match_id>\r
+            <mat:season>2025/26</mat:season>\r
+            <mat:match_week>8</mat:match_week>\r
+            <mat:match_date>2025-10-19</mat:match_date>\r
+            <mat:kickoff_time>15:30</mat:kickoff_time>\r
+            <mat:homeTeam>Liverpool</mat:homeTeam>\r
+            <mat:awayTeam>Manchester United</mat:awayTeam>\r
+            <mat:home_score>1</mat:home_score>\r
+            <mat:away_score>2</mat:away_score>\r
+         </mat:matchDetails>\r
+      </mat:createMatchRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
+        <con:wsrmConfig version="1.2"/>
+      </con:call>
+    </con:operation>
+    <con:operation id="994d2909-852d-4e4c-b293-ad17292159c6" isOneWay="false" action="" name="getAllData" bindingOperationName="getAllData" type="Request-Response" outputName="getAllDataResponse" inputName="getAllDataRequest" receivesAttachments="false" sendsAttachments="false">
+      <con:settings/>
+    </con:operation>
+    <con:operation id="a3544e0d-d839-445c-a69c-34e250c3af08" isOneWay="false" action="" name="getAllMatches" bindingOperationName="getAllMatches" type="Request-Response" outputName="getAllMatchesResponse" inputName="getAllMatchesRequest" receivesAttachments="false" sendsAttachments="false">
+      <con:settings/>
+    </con:operation>
+    <con:operation id="3bd7b01e-e6cd-4fda-8e0e-0bdc202a9ac1" isOneWay="false" action="" name="getMatch" bindingOperationName="getMatch" type="Request-Response" outputName="getMatchResponse" inputName="getMatchRequest" receivesAttachments="false" sendsAttachments="false">
+      <con:settings/>
+    </con:operation>
+    <con:operation id="3725f280-adc2-40cb-910e-bfebf947b6bb" isOneWay="false" action="" name="getTeam" bindingOperationName="getTeam" type="Request-Response" outputName="getTeamResponse" inputName="getTeamRequest" receivesAttachments="false" sendsAttachments="false">
+      <con:settings/>
+    </con:operation>
+    <con:operation id="1c40d72d-8247-4596-a186-8c9cf361e65c" isOneWay="false" action="" name="updateOwner" bindingOperationName="updateOwner" type="Request-Response" outputName="updateOwnerResponse" inputName="updateOwnerRequest" receivesAttachments="false" sendsAttachments="false">
+      <con:settings/>
+    </con:operation>
+  </con:interface>
+  <con:testSuite id="952c820e-cd91-4024-9fc3-12efd25e05cd" name="Create-Match-Tests">
+    <con:settings id="7721107a-c007-471e-9e0d-940792ce1ca9"/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="9e7db9db-b840-4d0a-bc03-63e76b334d8d" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Happy-Path" searchProperties="true" timeout="0">
+      <con:settings/>
+      <con:testStep type="request" id="cee586fb-4656-42d0-bc69-defecd754b0e" name="SOAP Request">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>MatchPortSoap11</con:interface>
+          <con:operation>createMatch</con:operation>
+          <con:request name="SOAP Request" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="4f564eb0-27a8-4f8f-8bac-f12505019b95">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://localhost:8080/ws</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mat:createMatchRequest>
+         <mat:matchDetails>
+            <mat:match_id>11111</mat:match_id>
+            <mat:season>2025/26</mat:season>
+            <mat:match_week>8</mat:match_week>
+            <mat:match_date>2025-10-19</mat:match_date>
+            <mat:kickoff_time>15:30</mat:kickoff_time>
+            <mat:homeTeam>Liverpool</mat:homeTeam>
+            <mat:awayTeam>Manchester United</mat:awayTeam>
+            <mat:home_score>1</mat:home_score>
+            <mat:away_score>2</mat:away_score>
+         </mat:matchDetails>
+      </mat:createMatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="Valid HTTP Status Codes" id="524b5fd1-acab-44f8-959b-b51a7ad8110e" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>200</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Response SLA Assertion" id="b6bb8acf-36e7-4e0e-9d95-88be4e08cf26" name="Response SLA">
+              <con:configuration>
+                <SLA>200</SLA>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="SOAP Fault Assertion" id="92fdd1dd-5de4-4ae1-9565-ad14e3e56078" name="Not SOAP Fault"/>
+            <con:assertion type="Schema Compliance" id="9c5802e6-6348-44c0-a8c7-5b272253aa4d" name="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:properties/>
+    <con:reportParameters/>
+  </con:testSuite>
+  <con:requirements/>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:databaseConnectionContainer/>
+  <con:jmsConnectionContainer/>
+  <con:oAuth2ProfileContainer/>
+  <con:oAuth1ProfileContainer/>
+  <con:reporting>
+    <con:xmlTemplates/>
+    <con:parameters/>
+  </con:reporting>
+  <con:eventHandlers type="RequestFilter.filterRequest" name="RequestFilter.filterRequest">
+    <con:script>// Sample event script to add custom HTTP header to all outgoing REST, SOAP and HTTP(S) calls
+// This code is often used for adding custom authentication to ReadyAPI functional tests
+
+// If hardcoding the token, uncomment and change line 5
+// token = '4567'
+
+// If your token is parameterized in Project level custom property, uncomment line 8
+// token = request.parent.testCase.testSuite.project.getProperty('auth_token').getValue()
+
+// To modify all outgoing calls, remove comments from lines 11 to 16
+// headers = request.requestHeaders
+// if (headers.containsKey('auth_token2') == false) {
+//   headers.put('auth_token2', token)
+//   request.requestHeaders = headers
+// }</con:script>
+  </con:eventHandlers>
+  <con:eventHandlers type="TestRunListener.afterStep" name="TestRunListener.afterStep">
+    <con:script>// Save all test step results into files
+// Change the directory path in line 5 to a location where you want to store details
+// then uncomment lines 5 to 10
+
+// filePath = 'C:\\tempOutputDirectory\\'
+// fos = new java.io.FileOutputStream(filePath + testStepResult.testStep.label + '.txt', true)
+// pw = new java.io.PrintWriter(fos)
+// testStepResult.writeTo(pw)
+// pw.close()
+// fos.close()</con:script>
+  </con:eventHandlers>
+  <con:authRepository/>
+  <con:tags/>
+</con:soapui-project>
