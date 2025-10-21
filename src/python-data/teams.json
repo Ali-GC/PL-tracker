@@ -1,0 +1,142 @@
+[
+  {
+    "team_id": 2,
+    "teamName": "Manchester United",
+    "venue": "Old Trafford",
+    "ownerName": "The Glazer family",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/1.svg"
+  },
+  {
+    "team_id": 3,
+    "teamName": "Manchester City",
+    "venue": "Etihad Stadium",
+    "ownerName": "Sheikh Mansour",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/43.svg"
+  },
+  {
+    "team_id": 4,
+    "teamName": "West Ham United",
+    "venue": "London Stadium",
+    "ownerName": "David Sullivan & Daniel Kretinsky",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/21.svg"
+  },
+  {
+    "team_id": 5,
+    "teamName": "Arsenal",
+    "venue": "Emirates Stadium",
+    "ownerName": "Stan Kroenke",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/3.svg"
+  },
+  {
+    "team_id": 6,
+    "teamName": "Tottenham Hotspur",
+    "venue": "Tottenham Hotspur Stadium",
+    "ownerName": "Joe Lewis",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/6.svg"
+  },
+  {
+    "team_id": 7,
+    "teamName": "Chelsea",
+    "venue": "Stamford Bridge",
+    "ownerName": "Todd Boehly & Clearlake Capital",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/8.svg"
+  },
+  {
+    "team_id": 8,
+    "teamName": "Brentford",
+    "venue": "Gtech Community Stadium",
+    "ownerName": "Matthew Benham",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/94.svg"
+  },
+  {
+    "team_id": 9,
+    "teamName": "Burnley",
+    "venue": "Turf Moor",
+    "ownerName": "Alan Pace",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/90.svg"
+  },
+  {
+    "team_id": 10,
+    "teamName": "Everton",
+    "venue": "Goodison Oark",
+    "ownerName": "Dan Friedkin",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/11.svg"
+  },
+  {
+    "team_id": 11,
+    "teamName": "Sunderland",
+    "venue": "Stadium of Light",
+    "ownerName": "Kyril Louis-Dreyfus",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/56.svg"
+  },
+  {
+    "team_id": 12,
+    "teamName": "Crystal Palace",
+    "venue": "Selhurst Park",
+    "ownerName": "John Textor; David S. Blitzer; Josh Harris; Steve Parish",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/31.svg"
+  },
+  {
+    "team_id": 13,
+    "teamName": "Newcastle United",
+    "venue": "St James Park",
+    "ownerName": "Saudi Public Investment Fund",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/4.svg"
+  },
+  {
+    "team_id": 14,
+    "teamName": "Nottingham Forest",
+    "venue": "City Ground",
+    "ownerName": "Evangelos Marinakis",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/17.svg"
+  },
+  {
+    "team_id": 15,
+    "teamName": "Bournemouth",
+    "venue": "Vitality Stadium",
+    "ownerName": "Maxim Demin",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/91.svg"
+  },
+  {
+    "team_id": 16,
+    "teamName": "Fulham",
+    "venue": "Craven Cottage",
+    "ownerName": "Shahid Khan",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/54.svg"
+  },
+  {
+    "team_id": 17,
+    "teamName": "Brighton & Hove Albion",
+    "venue": "American Express Community Stadium",
+    "ownerName": "Tony Bloom",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/36.svg"
+  },
+  {
+    "team_id": 18,
+    "teamName": "Wolverhampton Wanderers",
+    "venue": "Molineux Stadium",
+    "ownerName": "Guo Guangchang, Liang Xinjun, Wang Qunbin",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/39.svg"
+  },
+  {
+    "team_id": 19,
+    "teamName": "Aston Villa",
+    "venue": "Villa Park",
+    "ownerName": "Nassef Sawiris & Wes Edens",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/7.svg"
+  },
+  {
+    "team_id": 20,
+    "teamName": "Leeds United",
+    "venue": "Elland Road",
+    "ownerName": "49ers Enterprises Global Football Group LLC",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/2.svg"
+  },
+  {
+    "team_id": 1,
+    "teamName": "Liverpool",
+    "venue": "Anfield",
+    "ownerName": "Squiggly Miggly",
+    "logo_url": "https://resources.premierleague.com/premierleague25/badges-alt/14.svg"
+  }
+]
