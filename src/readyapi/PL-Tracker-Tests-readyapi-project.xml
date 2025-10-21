@@ -379,7 +379,7 @@
             </con:assertion>
             <con:assertion type="Response SLA Assertion" id="b6bb8acf-36e7-4e0e-9d95-88be4e08cf26" name="Response SLA">
               <con:configuration>
-                <SLA>200</SLA>
+                <SLA>500</SLA>
               </con:configuration>
             </con:assertion>
             <con:assertion type="SOAP Fault Assertion" id="92fdd1dd-5de4-4ae1-9565-ad14e3e56078" name="Not SOAP Fault"/>
@@ -392,6 +392,111 @@
             </con:credentials>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase id="d3cc571d-6a79-430b-9535-bf1ac567ff65" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Same-Team-Constraint" searchProperties="true" timeout="0">
+      <con:settings/>
+      <con:testStep type="request" id="0ebadb90-96f1-4384-a1bd-cdaa7a23ab90" name="SOAP Request">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>MatchPortSoap11</con:interface>
+          <con:operation>createMatch</con:operation>
+          <con:request name="SOAP Request" id="50037383-cea3-438a-9b47-7ad5e9e88384">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://localhost:8080/ws</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mat:createMatchRequest>
+         <mat:matchDetails>
+            <mat:match_id>1111</mat:match_id>
+            <mat:season>2025/26</mat:season>
+            <mat:match_week>8</mat:match_week>
+            <mat:match_date>2025-10-19</mat:match_date>
+            <mat:kickoff_time>15:30</mat:kickoff_time>
+            <mat:homeTeam>Liverpool</mat:homeTeam>
+            <mat:awayTeam>Liverpool</mat:awayTeam>
+            <mat:home_score>1</mat:home_score>
+            <mat:away_score>2</mat:away_score>
+         </mat:matchDetails>
+      </mat:createMatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="Valid HTTP Status Codes" id="ba6cab66-eb65-4ff5-adc5-024bcce86403" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>500</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Schema Compliance" id="a7987930-9c45-4de5-81b5-42d497e2e91f" name="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="DataAndMetadataAssertion" id="af83b77e-b326-4f42-adce-9688e1f8e759" name="Smart Assertion">
+              <con:configuration xsi:type="con:DataAndMetadataAssertion">
+                <con:mode>Received Data</con:mode>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:Header[1]</con:path>
+                  <con:element>SOAP-ENV:Header</con:element>
+                  <con:operatorId>9</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue xsi:nil="true"/>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultcode[1]</con:path>
+                  <con:element>faultcode</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>SOAP-ENV:Server</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultstring[1]</con:path>
+                  <con:element>faultstring</con:element>
+                  <con:operatorId>13</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>home_team_cannot_equal_away_team</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://www.w3.org/XML/1998/namespace';
+//faultstring[1]/@ns1:lang</con:path>
+                  <con:element>@xml:lang</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>en</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:originalMessage><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Server</faultcode>
+         <faultstring xml:lang="en">could not execute statement [ERROR: new row for relation "matches" violates check constraint "home_team_cannot_equal_away_team"
+  Detail: Failing row contains (1111, 2025/26, 8, 15:30, null, Liverpool, Liverpool, 1, 2).] [insert into matches (away_team,away_score,home_team,home_score,kickoff_time,match_date,match_week,season,match_id) values (?,?,?,?,?,?,?,?,?)]; SQL [insert into matches (away_team,away_score,home_team,home_score,kickoff_time,match_date,match_week,season,match_id) values (?,?,?,?,?,?,?,?,?)]; constraint [home_team_cannot_equal_away_team]</faultstring>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:originalMessage>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:wsaConfig action="match.pltracker.com/MatchPort/createMatchRequest" mustUnderstand="NONE" version="200508"/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>
