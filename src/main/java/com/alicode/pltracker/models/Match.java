@@ -1,5 +1,7 @@
 package com.alicode.pltracker.models;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -19,7 +21,7 @@ public class Match {
     private Long match_id;
     private String season;
     private Integer match_week;
-    private String match_date;
+    private LocalDate match_date;
     private String kickoff_time;
     private String homeTeam;
     private String awayTeam;
@@ -34,11 +36,11 @@ public class Match {
         this.match_id = match_id;
     }
 
-    public String getMatchDate(){
+    public LocalDate getMatchDate(){
         return match_date;
     }
 
-    public void setMatchDate(String match_date){
+    public void setMatchDate(LocalDate match_date){
         this.match_date = match_date;
     }
 

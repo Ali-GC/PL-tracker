@@ -55,7 +55,7 @@ public class DatabaseEndpoint {
             matchDetails.setMatchId(match.getMatchId());
             matchDetails.setSeason(match.getSeason());
             matchDetails.setMatchWeek(match.getMatchWeek());
-            matchDetails.setMatchDate(match.getMatchDate());
+            matchDetails.setMatchDate(toXMLGregorianCalendar(match.getMatchDate()));
             matchDetails.setKickoffTime(match.getKickoffTime());
             matchDetails.setHomeTeam(match.getHomeTeam());
             matchDetails.setAwayTeam(match.getAwayTeam());

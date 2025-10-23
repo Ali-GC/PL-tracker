@@ -55,7 +55,7 @@
             <xs:element name="match_id" type="xs:long" />
             <xs:element name="season" type="xs:string" />
             <xs:element name="match_week" type="xs:int" nillable="true"/>
-            <xs:element name="match_date" type="xs:string"/>
+            <xs:element name="match_date" type="xs:date" nillable="true"/>
             <xs:element name="kickoff_time" type="xs:string" />
             <xs:element name="homeTeam" type="xs:string" />
             <xs:element name="awayTeam" type="xs:string" />

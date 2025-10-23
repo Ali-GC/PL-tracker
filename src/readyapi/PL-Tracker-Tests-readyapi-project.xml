@@ -456,16 +456,16 @@
                   <con:element>faultcode</con:element>
                   <con:operatorId>1</con:operatorId>
                   <con:enabled>true</con:enabled>
-                  <con:expectedValue>SOAP-ENV:Server</con:expectedValue>
+                  <con:expectedValue>SOAP-ENV:Client</con:expectedValue>
                   <con:caseSensitive>true</con:caseSensitive>
                   <con:numberType>false</con:numberType>
                 </con:elements>
                 <con:elements>
                   <con:path>//faultstring[1]</con:path>
                   <con:element>faultstring</con:element>
-                  <con:operatorId>13</con:operatorId>
+                  <con:operatorId>1</con:operatorId>
                   <con:enabled>true</con:enabled>
-                  <con:expectedValue>home_team_cannot_equal_away_team</con:expectedValue>
+                  <con:expectedValue>Home team and away team cannot be the same</con:expectedValue>
                   <con:caseSensitive>true</con:caseSensitive>
                   <con:numberType>false</con:numberType>
                 </con:elements>
@@ -497,6 +497,605 @@
             </con:credentials>
             <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
             <con:wsaConfig action="match.pltracker.com/MatchPort/createMatchRequest" mustUnderstand="NONE" version="200508"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase id="3cfbb523-654e-44e5-8941-672f8a6e29ed" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Team-Name-Null-Empty-Constraint" searchProperties="true" timeout="0">
+      <con:settings/>
+      <con:testStep type="request" id="32306089-f0ed-4ba2-839b-0115450b8b99" name="Home Team Empty">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>MatchPortSoap11</con:interface>
+          <con:operation>createMatch</con:operation>
+          <con:request name="Home Team Empty" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="1fb13206-c0ba-45c9-b089-1342d3a6b741">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://localhost:8080/ws</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mat:createMatchRequest>
+         <mat:matchDetails>
+            <mat:match_id>11111</mat:match_id>
+            <mat:season>2025/26</mat:season>
+            <mat:match_week>8</mat:match_week>
+            <mat:match_date>2025-10-19</mat:match_date>
+            <mat:kickoff_time>15:30</mat:kickoff_time>
+            <mat:homeTeam/>
+            <mat:awayTeam>Manchester United</mat:awayTeam>
+            <mat:home_score>1</mat:home_score>
+            <mat:away_score>2</mat:away_score>
+         </mat:matchDetails>
+      </mat:createMatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="Valid HTTP Status Codes" id="f04c8b4c-d9b2-467d-87f6-7ada719b8dbe" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>500</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Schema Compliance" id="55070135-f349-424a-bc2f-d5accc1dad8a" name="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="DataAndMetadataAssertion" id="e9b7a8f7-d59f-43d0-9882-3352858331e0" name="Smart Assertion">
+              <con:configuration xsi:type="con:DataAndMetadataAssertion">
+                <con:mode>Received Data</con:mode>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:Header[1]</con:path>
+                  <con:element>SOAP-ENV:Header</con:element>
+                  <con:operatorId>9</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultcode[1]</con:path>
+                  <con:element>faultcode</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>SOAP-ENV:Client</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultstring[1]</con:path>
+                  <con:element>faultstring</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>Home team cannot be null or empty</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://www.w3.org/XML/1998/namespace';
+//faultstring[1]/@ns1:lang</con:path>
+                  <con:element>@xml:lang</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>en</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:originalMessage><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Client</faultcode>
+         <faultstring xml:lang="en">Home team cannot be null or empty</faultstring>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:originalMessage>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" id="a0d8bad2-5665-41e2-9160-cffff86e3264" name="Away Team Empty">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>MatchPortSoap11</con:interface>
+          <con:operation>createMatch</con:operation>
+          <con:request name="Away Team Empty" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="4a6192cd-da58-4136-962b-571871f89af3">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://localhost:8080/ws</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mat:createMatchRequest>
+         <mat:matchDetails>
+            <mat:match_id>11111</mat:match_id>
+            <mat:season>2025/26</mat:season>
+            <mat:match_week>8</mat:match_week>
+            <mat:match_date>2025-10-19</mat:match_date>
+            <mat:kickoff_time>15:30</mat:kickoff_time>
+            <mat:homeTeam>Liverpool</mat:homeTeam>
+            <mat:awayTeam/>
+            <mat:home_score>1</mat:home_score>
+            <mat:away_score>2</mat:away_score>
+         </mat:matchDetails>
+      </mat:createMatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="Valid HTTP Status Codes" id="13f0a5e0-8411-4694-99a6-e6f2d3a0ac6c" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>500</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Schema Compliance" id="46beaccc-8d4b-4320-a679-f8a5295aa510" name="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="DataAndMetadataAssertion" id="39fc6205-3c38-448b-a6e2-04106b9bf3ef" name="Smart Assertion">
+              <con:configuration xsi:type="con:DataAndMetadataAssertion">
+                <con:mode>Received Data</con:mode>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:Header[1]</con:path>
+                  <con:element>SOAP-ENV:Header</con:element>
+                  <con:operatorId>9</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultcode[1]</con:path>
+                  <con:element>faultcode</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>SOAP-ENV:Client</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultstring[1]</con:path>
+                  <con:element>faultstring</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>Away team cannot be null or empty</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://www.w3.org/XML/1998/namespace';
+//faultstring[1]/@ns1:lang</con:path>
+                  <con:element>@xml:lang</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>en</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:originalMessage><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Client</faultcode>
+         <faultstring xml:lang="en">Away team cannot be null or empty</faultstring>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:originalMessage>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:properties/>
+      <con:reportParameters/>
+    </con:testCase>
+    <con:testCase id="05fca979-b674-4b0e-8ed5-9c9f4c243be4" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Score-Integer-Constraint" searchProperties="true" timeout="0">
+      <con:settings/>
+      <con:testStep type="request" id="847fb7e9-9a2e-4340-a739-4da29adb63a9" name="Home Score Non Integer">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>MatchPortSoap11</con:interface>
+          <con:operation>createMatch</con:operation>
+          <con:request name="Home Score Non Integer" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="5dfbfdc5-50c4-4bf0-b10d-67f45dc447fc">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://localhost:8080/ws</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mat:createMatchRequest>
+         <mat:matchDetails>
+            <mat:match_id>11111</mat:match_id>
+            <mat:season>2025/26</mat:season>
+            <mat:match_week>8</mat:match_week>
+            <mat:match_date>2025-10-19</mat:match_date>
+            <mat:kickoff_time>15:30</mat:kickoff_time>
+            <mat:homeTeam>Liverpool</mat:homeTeam>
+            <mat:awayTeam>Manchester United</mat:awayTeam>
+            <mat:home_score>Hello</mat:home_score>
+            <mat:away_score>2</mat:away_score>
+         </mat:matchDetails>
+      </mat:createMatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="Valid HTTP Status Codes" id="45b36c91-9467-4414-a2fa-e99809f3b0e8" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>500</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Schema Compliance" id="b548ec54-f7af-48bb-adcc-6d3629e6dff0" name="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="DataAndMetadataAssertion" id="e5be6020-649b-4bf1-82de-ef6f868f1a20" name="Smart Assertion">
+              <con:configuration xsi:type="con:DataAndMetadataAssertion">
+                <con:mode>Received Data</con:mode>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:Header[1]</con:path>
+                  <con:element>SOAP-ENV:Header</con:element>
+                  <con:operatorId>9</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultcode[1]</con:path>
+                  <con:element>faultcode</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>SOAP-ENV:Client</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultstring[1]</con:path>
+                  <con:element>faultstring</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>home score is required and must be an integer</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://www.w3.org/XML/1998/namespace';
+//faultstring[1]/@ns1:lang</con:path>
+                  <con:element>@xml:lang</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>en</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:originalMessage><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Client</faultcode>
+         <faultstring xml:lang="en">home score is required and must be an integer</faultstring>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:originalMessage>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" id="dd8a5266-c1ab-4d5b-9796-6e55edaebb38" name="Home Score Null">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>MatchPortSoap11</con:interface>
+          <con:operation>createMatch</con:operation>
+          <con:request name="Home Score Null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="5dfbfdc5-50c4-4bf0-b10d-67f45dc447fc">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://localhost:8080/ws</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mat:createMatchRequest>
+         <mat:matchDetails>
+            <mat:match_id>11111</mat:match_id>
+            <mat:season>2025/26</mat:season>
+            <mat:match_week>8</mat:match_week>
+            <mat:match_date>2025-10-19</mat:match_date>
+            <mat:kickoff_time>15:30</mat:kickoff_time>
+            <mat:homeTeam>Liverpool</mat:homeTeam>
+            <mat:awayTeam>Manchester United</mat:awayTeam>
+            <mat:away_score>2</mat:away_score>
+         </mat:matchDetails>
+      </mat:createMatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="Valid HTTP Status Codes" id="45b36c91-9467-4414-a2fa-e99809f3b0e8" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>500</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Schema Compliance" id="b548ec54-f7af-48bb-adcc-6d3629e6dff0" name="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="DataAndMetadataAssertion" id="e5be6020-649b-4bf1-82de-ef6f868f1a20" name="Smart Assertion">
+              <con:configuration xsi:type="con:DataAndMetadataAssertion">
+                <con:mode>Received Data</con:mode>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:Header[1]</con:path>
+                  <con:element>SOAP-ENV:Header</con:element>
+                  <con:operatorId>9</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue xsi:nil="true"/>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultcode[1]</con:path>
+                  <con:element>faultcode</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>SOAP-ENV:Client</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultstring[1]</con:path>
+                  <con:element>faultstring</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>home score is required and must be an integer</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://www.w3.org/XML/1998/namespace';
+//faultstring[1]/@ns1:lang</con:path>
+                  <con:element>@xml:lang</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>en</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:originalMessage><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Client</faultcode>
+         <faultstring xml:lang="en">home score is required and must be an integer</faultstring>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:originalMessage>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" id="1f2804a9-f957-40dc-808a-1242143c17ba" name="Away Score Non Integer">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>MatchPortSoap11</con:interface>
+          <con:operation>createMatch</con:operation>
+          <con:request name="Away Score Non Integer" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="5dfbfdc5-50c4-4bf0-b10d-67f45dc447fc">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://localhost:8080/ws</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mat:createMatchRequest>
+         <mat:matchDetails>
+            <mat:match_id>11111</mat:match_id>
+            <mat:season>2025/26</mat:season>
+            <mat:match_week>8</mat:match_week>
+            <mat:match_date>2025-10-19</mat:match_date>
+            <mat:kickoff_time>15:30</mat:kickoff_time>
+            <mat:homeTeam>Liverpool</mat:homeTeam>
+            <mat:awayTeam>Manchester United</mat:awayTeam>
+            <mat:home_score>0</mat:home_score>
+            <mat:away_score>Hello</mat:away_score>
+         </mat:matchDetails>
+      </mat:createMatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="Valid HTTP Status Codes" id="45b36c91-9467-4414-a2fa-e99809f3b0e8" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>500</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Schema Compliance" id="b548ec54-f7af-48bb-adcc-6d3629e6dff0" name="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="DataAndMetadataAssertion" id="e5be6020-649b-4bf1-82de-ef6f868f1a20" name="Smart Assertion">
+              <con:configuration xsi:type="con:DataAndMetadataAssertion">
+                <con:mode>Received Data</con:mode>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:Header[1]</con:path>
+                  <con:element>SOAP-ENV:Header</con:element>
+                  <con:operatorId>9</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue xsi:nil="true"/>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultcode[1]</con:path>
+                  <con:element>faultcode</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>SOAP-ENV:Client</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultstring[1]</con:path>
+                  <con:element>faultstring</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>away score is required and must be an integer</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://www.w3.org/XML/1998/namespace';
+//faultstring[1]/@ns1:lang</con:path>
+                  <con:element>@xml:lang</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>en</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:originalMessage><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Client</faultcode>
+         <faultstring xml:lang="en">home score is required and must be an integer</faultstring>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:originalMessage>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
+            <con:wsrmConfig version="1.2"/>
+          </con:request>
+        </con:config>
+      </con:testStep>
+      <con:testStep type="request" id="3960d780-1fca-4b3b-9141-568fff635be8" name="Away Score Null">
+        <con:settings/>
+        <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+          <con:interface>MatchPortSoap11</con:interface>
+          <con:operation>createMatch</con:operation>
+          <con:request name="Away Score Null" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType="" id="5dfbfdc5-50c4-4bf0-b10d-67f45dc447fc">
+            <con:settings>
+              <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+            </con:settings>
+            <con:encoding>UTF-8</con:encoding>
+            <con:endpoint>http://localhost:8080/ws</con:endpoint>
+            <con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mat="match.pltracker.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mat:createMatchRequest>
+         <mat:matchDetails>
+            <mat:match_id>11111</mat:match_id>
+            <mat:season>2025/26</mat:season>
+            <mat:match_week>8</mat:match_week>
+            <mat:match_date>2025-10-19</mat:match_date>
+            <mat:kickoff_time>15:30</mat:kickoff_time>
+            <mat:homeTeam>Liverpool</mat:homeTeam>
+            <mat:awayTeam>Manchester United</mat:awayTeam>
+            <mat:home_score>0</mat:home_score>
+         </mat:matchDetails>
+      </mat:createMatchRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request>
+            <con:assertion type="Valid HTTP Status Codes" id="45b36c91-9467-4414-a2fa-e99809f3b0e8" name="Valid HTTP Status Codes">
+              <con:settings/>
+              <con:configuration>
+                <codes>500</codes>
+              </con:configuration>
+            </con:assertion>
+            <con:assertion type="Schema Compliance" id="b548ec54-f7af-48bb-adcc-6d3629e6dff0" name="Schema Compliance">
+              <con:configuration/>
+            </con:assertion>
+            <con:assertion type="DataAndMetadataAssertion" id="e5be6020-649b-4bf1-82de-ef6f868f1a20" name="Smart Assertion">
+              <con:configuration xsi:type="con:DataAndMetadataAssertion">
+                <con:mode>Received Data</con:mode>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:Header[1]</con:path>
+                  <con:element>SOAP-ENV:Header</con:element>
+                  <con:operatorId>9</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue xsi:nil="true"/>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultcode[1]</con:path>
+                  <con:element>faultcode</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>SOAP-ENV:Client</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>//faultstring[1]</con:path>
+                  <con:element>faultstring</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>away score is required and must be an integer</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:elements>
+                  <con:path>declare namespace ns1='http://www.w3.org/XML/1998/namespace';
+//faultstring[1]/@ns1:lang</con:path>
+                  <con:element>@xml:lang</con:element>
+                  <con:operatorId>1</con:operatorId>
+                  <con:enabled>true</con:enabled>
+                  <con:expectedValue>en</con:expectedValue>
+                  <con:caseSensitive>true</con:caseSensitive>
+                  <con:numberType>false</con:numberType>
+                </con:elements>
+                <con:originalMessage><![CDATA[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Client</faultcode>
+         <faultstring xml:lang="en">home score is required and must be an integer</faultstring>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>]]></con:originalMessage>
+              </con:configuration>
+            </con:assertion>
+            <con:credentials>
+              <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+              <con:authType>No Authorization</con:authType>
+            </con:credentials>
+            <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+            <con:wsaConfig mustUnderstand="NONE" version="200508" action="match.pltracker.com/MatchPort/createMatchRequest"/>
             <con:wsrmConfig version="1.2"/>
           </con:request>
         </con:config>

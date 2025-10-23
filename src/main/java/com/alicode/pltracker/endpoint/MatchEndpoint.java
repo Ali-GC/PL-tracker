@@ -54,7 +54,7 @@ public class MatchEndpoint {
             matchDetails.setMatchId(match.getMatchId());
             matchDetails.setSeason(match.getSeason());
             matchDetails.setMatchWeek(match.getMatchWeek());
-            matchDetails.setMatchDate(match.getMatchDate());
+            matchDetails.setMatchDate(toXMLGregorianCalendar(match.getMatchDate()));
             matchDetails.setKickoffTime(match.getKickoffTime());
             matchDetails.setHomeTeam(match.getHomeTeam());
             matchDetails.setAwayTeam(match.getAwayTeam());
@@ -72,7 +72,7 @@ public class MatchEndpoint {
             matchDetails.setMatchId(match.getMatchId());
             matchDetails.setSeason(match.getSeason());
             matchDetails.setMatchWeek(match.getMatchWeek());
-            matchDetails.setMatchDate(match.getMatchDate());
+            matchDetails.setMatchDate(toXMLGregorianCalendar(match.getMatchDate()));
             matchDetails.setKickoffTime(match.getKickoffTime());
             matchDetails.setHomeTeam(match.getHomeTeam());
             matchDetails.setAwayTeam(match.getAwayTeam());
@@ -98,7 +98,7 @@ public class MatchEndpoint {
         match.setMatchId(matchDetails.getMatchId());
         match.setSeason(matchDetails.getSeason());
         match.setMatchWeek(matchDetails.getMatchWeek());
-        match.setMatchDate(matchDetails.getMatchDate());
+        match.setMatchDate(matchDetails.getMatchDate().toGregorianCalendar().toZonedDateTime().toLocalDate());
         match.setKickoffTime(matchDetails.getKickoffTime());
         match.setHomeTeam(matchDetails.getHomeTeam());
         match.setAwayTeam(matchDetails.getAwayTeam());
