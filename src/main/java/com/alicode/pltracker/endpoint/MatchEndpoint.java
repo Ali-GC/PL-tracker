@@ -1,6 +1,13 @@
 package com.alicode.pltracker.endpoint;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.GregorianCalendar;
 import java.util.List;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -8,6 +15,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import com.alicode.exceptions.InvalidRequestException;
 import com.alicode.pltracker.models.Match;
 import com.alicode.pltracker.service.MatchService;
 import com.pltracker.match.CreateMatchRequest;
@@ -47,7 +55,7 @@ public class MatchEndpoint {
             matchDetails.setSeason(match.getSeason());
             matchDetails.setMatchWeek(match.getMatchWeek());
             matchDetails.setMatchDate(match.getMatchDate());
-            matchDetails.setKickoffTime(match.getKickoffDate());
+            matchDetails.setKickoffTime(match.getKickoffTime());
             matchDetails.setHomeTeam(match.getHomeTeam());
             matchDetails.setAwayTeam(match.getAwayTeam());
             matchDetails.setHomeScore(match.getHomeScore());
@@ -65,7 +73,7 @@ public class MatchEndpoint {
             matchDetails.setSeason(match.getSeason());
             matchDetails.setMatchWeek(match.getMatchWeek());
             matchDetails.setMatchDate(match.getMatchDate());
-            matchDetails.setKickoffTime(match.getKickoffDate());
+            matchDetails.setKickoffTime(match.getKickoffTime());
             matchDetails.setHomeTeam(match.getHomeTeam());
             matchDetails.setAwayTeam(match.getAwayTeam());
             matchDetails.setHomeScore(match.getHomeScore());
@@ -79,6 +87,7 @@ public class MatchEndpoint {
     @ResponsePayload
     public CreateMatchResponse createMatchRequest(@RequestPayload CreateMatchRequest request){
         MatchDetails matchDetails = request.getMatchDetails();
+        matchDetailValidation(matchDetails);
         Match match = mapMatchDetails(matchDetails);
         Match newMatch = service.create(match);
         return new CreateMatchResponse();
@@ -90,14 +99,56 @@ public class MatchEndpoint {
         match.setSeason(matchDetails.getSeason());
         match.setMatchWeek(matchDetails.getMatchWeek());
         match.setMatchDate(matchDetails.getMatchDate());
-        match.setKickoffDate(matchDetails.getKickoffTime());
+        match.setKickoffTime(matchDetails.getKickoffTime());
         match.setHomeTeam(matchDetails.getHomeTeam());
         match.setAwayTeam(matchDetails.getAwayTeam());
         match.setHomeScore(matchDetails.getHomeScore());
         match.setAwayScore(matchDetails.getAwayScore());
         return match;
     }
+
+    private void matchDetailValidation(MatchDetails match) {
+        // Basic field validation
+        if (match.getHomeTeam() == null || match.getHomeTeam().trim().isEmpty()) {
+            throw new InvalidRequestException("Home team cannot be null or empty");
+        }
+
+        if (match.getAwayTeam() == null || match.getAwayTeam().trim().isEmpty()) {
+            throw new InvalidRequestException("Away team cannot be null or empty");
+        }
+
+        if (match.getHomeTeam().equals(match.getAwayTeam())) {
+            throw new InvalidRequestException("Home team and away team cannot be the same");
+        }
+
+        if (match.getHomeScore() == null) {
+            throw new InvalidRequestException("home score is required and must be an integer");
+        }
+        
+        if (match.getAwayScore() == null) {
+            throw new InvalidRequestException("away score is required and must be an integer");
+        }
+
+        if (match.getMatchDate() == null) {
+            throw new InvalidRequestException("match_date must be a valid date (YYYY-MM-DD)");
+        }
+    }
+
+    private static XMLGregorianCalendar toXMLGregorianCalendar(LocalDate localDate) {
+        if (localDate == null) return null;
+
+        try{ 
+            GregorianCalendar gcal = GregorianCalendar.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            XMLGregorianCalendar xcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+            return xcal;
+        }
+        catch (DatatypeConfigurationException e) {
+            throw new RuntimeException("Error creating XMLGregorianCalendar", e);
+        }
+    }
 }
+
+
 
 
 

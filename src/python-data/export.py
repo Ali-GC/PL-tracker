@@ -42,7 +42,6 @@ def local_name(tag: str) -> str:
         return tag.split("}", 1)[1]
     return tag
 
-# Try to parse XML from file; if not present, you can paste xml_data as string
 xml_data = export()
 
 # Parse
@@ -61,7 +60,7 @@ for m in matches_elems:
 
         # Convert numeric-looking values to int when sensible
         if val is not None:
-            # treat match_id and scores as integers if possible (allow negatives)
+            # treat match_id and scores as integers if possible
             if key in ("match_id", "home_score", "away_score", "match_week"):
                 try:
                     obj[key] = int(val)

@@ -18,13 +18,13 @@ public class Match {
     @Id
     private Long match_id;
     private String season;
-    private int match_week;
+    private Integer match_week;
     private String match_date;
     private String kickoff_time;
     private String homeTeam;
     private String awayTeam;
-    private int home_score;
-    private int away_score;
+    private Integer home_score;
+    private Integer away_score;
 
     public Long getMatchId(){
         return match_id;
@@ -42,35 +42,35 @@ public class Match {
         this.match_date = match_date;
     }
 
-    public int getMatchWeek(){
+    public Integer getMatchWeek(){
         return match_week;
     }
 
-    public void setMatchWeek(int match_week){
+    public void setMatchWeek(Integer match_week){
         this.match_week = match_week;
     }
 
-    public String getKickoffDate(){
-        return match_date;
+    public String getKickoffTime(){
+        return kickoff_time;
     }
 
-    public void setKickoffDate(String match_date){
-        this.match_date = match_date;
+    public void setKickoffTime(String kickoff_time){
+        this.kickoff_time = kickoff_time;
     }
 
-    public int getHomeScore(){
+    public Integer getHomeScore(){
         return home_score;
     }
 
-    public void setHomeScore(int home_score){
+    public void setHomeScore(Integer home_score){
         this.home_score = home_score;
     }
     
-    public int getAwayScore(){
+    public Integer getAwayScore(){
         return away_score;
     }
 
-    public void setAwayScore(int away_score){
+    public void setAwayScore(Integer away_score){
         this.away_score = away_score;
     }
 }

@@ -54,13 +54,13 @@
         <xs:sequence>
             <xs:element name="match_id" type="xs:long" />
             <xs:element name="season" type="xs:string" />
-            <xs:element name="match_week" type="xs:int" />
-            <xs:element name="match_date" type="xs:string" />
+            <xs:element name="match_week" type="xs:int" nillable="true"/>
+            <xs:element name="match_date" type="xs:string"/>
             <xs:element name="kickoff_time" type="xs:string" />
             <xs:element name="homeTeam" type="xs:string" />
             <xs:element name="awayTeam" type="xs:string" />
-            <xs:element name="home_score" type="xs:int" />
-            <xs:element name="away_score" type="xs:int" />
+            <xs:element name="home_score" type="xs:int" nillable="true" />
+            <xs:element name="away_score" type="xs:int" nillable="true" />
         </xs:sequence>
     </xs:complexType>
 

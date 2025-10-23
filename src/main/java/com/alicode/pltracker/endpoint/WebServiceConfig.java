@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
+import org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -15,6 +16,14 @@ import org.springframework.xml.xsd.XsdSchema;
 
 @Configuration
 public class WebServiceConfig {
+    @Bean
+    public PayloadValidatingInterceptor validatingInterceptor() {
+        PayloadValidatingInterceptor interceptor = new PayloadValidatingInterceptor();
+        interceptor.setSchema(new ClassPathResource("match.xsd"));
+        interceptor.setValidateRequest(true);
+        interceptor.setValidateResponse(true);
+        return interceptor;
+}
     
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext context){

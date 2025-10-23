@@ -106,3 +106,10 @@ if ($response->is_success) {
 else {
     die $response->status_line;
 }
+
+sub getDataFromPostgres {
+    my $myConnection = DBI->connect("DBI:Pg:dbname=matches;host=localhost", "postgres", "docker");
+    my $query = $myConnection->prepare("SELECT * FROM matches");
+    my $result = $query->execute();
+    return $result
+}

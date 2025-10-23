@@ -1,6 +1,13 @@
 package com.alicode.pltracker.endpoint;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.GregorianCalendar;
 import java.util.List;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -49,7 +56,7 @@ public class DatabaseEndpoint {
             matchDetails.setSeason(match.getSeason());
             matchDetails.setMatchWeek(match.getMatchWeek());
             matchDetails.setMatchDate(match.getMatchDate());
-            matchDetails.setKickoffTime(match.getKickoffDate());
+            matchDetails.setKickoffTime(match.getKickoffTime());
             matchDetails.setHomeTeam(match.getHomeTeam());
             matchDetails.setAwayTeam(match.getAwayTeam());
             matchDetails.setHomeScore(match.getHomeScore());
@@ -71,5 +78,18 @@ public class DatabaseEndpoint {
             response.getTeam().add(teamDetails);
         }
         return response;
+    }
+    
+    private static XMLGregorianCalendar toXMLGregorianCalendar(LocalDate localDate) {
+        if (localDate == null) return null;
+
+        try{ 
+            GregorianCalendar gcal = GregorianCalendar.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            XMLGregorianCalendar xcal = DatatypeFactory.newInstance().newXMLGregorianCalendar(gcal);
+            return xcal;
+        }
+        catch (DatatypeConfigurationException e) {
+            throw new RuntimeException("Error creating XMLGregorianCalendar", e);
+        }
     }
 }

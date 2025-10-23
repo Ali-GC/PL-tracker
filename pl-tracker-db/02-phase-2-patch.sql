@@ -13,7 +13,9 @@ CREATE TABLE matches (
 );
 
 ALTER TABLE matches
-ADD CONSTRAINT home_team_cannot_equal_away_team CHECK (home_team <> away_team);
+ADD CONSTRAINT home_team_cannot_equal_away_team CHECK (home_team <> away_team),
+ADD CONSTRAINT home_team_cannot_be_empty CHECK (home_team <> ''),
+ADD CONSTRAINT away_team_cannot_be_empty CHECK (away_team <> '');
 
 DROP TABLE IF EXISTS teams;
 
